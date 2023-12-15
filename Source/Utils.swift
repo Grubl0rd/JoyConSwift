@@ -9,17 +9,17 @@
 import Foundation
 
 func ReadInt16(from ptr: UnsafePointer<UInt8>) -> Int16 {
-    return ptr.withMemoryRebound(to: Int16.self, capacity: 1) { $0.pointee }
+    return UnsafeRawPointer(ptr).loadUnaligned(as: Int16.self)
 }
 
 func ReadUInt16(from ptr: UnsafePointer<UInt8>) -> UInt16 {
-    return ptr.withMemoryRebound(to: UInt16.self, capacity: 1) { $0.pointee }
+    return UnsafeRawPointer(ptr).loadUnaligned(as: UInt16.self)
 }
 
 func ReadInt32(from ptr: UnsafePointer<UInt8>) -> Int32 {
-    return ptr.withMemoryRebound(to: Int32.self, capacity: 1) { $0.pointee }
+    return UnsafeRawPointer(ptr).loadUnaligned(as: Int32.self)
 }
 
 func ReadUInt32(from ptr: UnsafePointer<UInt8>) -> UInt32 {
-    return ptr.withMemoryRebound(to: UInt32.self, capacity: 1) { $0.pointee }
+    return UnsafeRawPointer(ptr).loadUnaligned(as: UInt32.self)
 }
