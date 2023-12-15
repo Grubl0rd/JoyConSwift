@@ -1,16 +1,6 @@
 # JoyConSwift
 IOKit wrapper for Nintendo Joy-Con and ProController (macOS, Swift)
 
-## Installation
-
-### Using [CocoaPods](http://cocoapods.org/)
-
-Add the following to your [Podfile](http://guides.cocoapods.org/using/the-podfile.html):
-
-```rb
-pod 'JoyConSwift'
-```
-
 ## Set USB Capability
 
 To use controllers, you need to check `Signing & Capabilities` > `App SandBox` > `USB` in your Xcode project.

@@ -24,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A668F2F2B2CF72700722E06 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		6A668F302B2CF72700722E06 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		DD8D412D22B616A500C729D9 /* JoyConSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JoyConSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8D413022B616A500C729D9 /* JoyConSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JoyConSwift.h; sourceTree = "<group>"; };
 		DD8D413122B616A500C729D9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -56,6 +58,8 @@
 		DD8D412322B616A500C729D9 = {
 			isa = PBXGroup;
 			children = (
+				6A668F2F2B2CF72700722E06 /* LICENSE */,
+				6A668F302B2CF72700722E06 /* README.md */,
 				DD8D412F22B616A500C729D9 /* Source */,
 				DD8D412E22B616A500C729D9 /* Products */,
 			);
