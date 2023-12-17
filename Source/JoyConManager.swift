@@ -77,35 +77,34 @@ public class JoyConManager {
     
     func handleControllerType(device: IOHIDDevice, result: IOReturn, value: IOHIDValue) {
         guard self.matchingControllers.contains(device) else { return }
-        let ptr = IOHIDValueGetBytePtr(value)
-        let address = ReadUInt32(from: ptr+14)
-        let length = Int((ptr+18).pointee)
-        guard address == 0x6012, length == 1 else { return }
-        let buffer = UnsafeBufferPointer(start: ptr+19, count: length)
-        let data = Array(buffer)
         
-        var _controller: Controller? = nil
-        switch data[0] {
-        case JoyConManager.joyConLType:
-            _controller = JoyConL(device: device)
-            break
-        case JoyConManager.joyConRType:
-            _controller = JoyConR(device: device)
-            break
-        case JoyConManager.proConType:
-            _controller = ProController(device: device)
-            break
-        case JoyConManager.famicomCon1Type:
-            _controller = FamicomController1(device: device)
-            break
-        case JoyConManager.famicomCon2Type:
-            _controller = FamicomController2(device: device)
-            break
-        case JoyConManager.snesConType:
-            _controller = SNESController(device: device)
-            break
-        default:
-            break
+        let _vendorIDProperty = IOHIDDeviceGetProperty(device, kIOHIDVendorIDKey as CFString)
+        let _productIDProperty = IOHIDDeviceGetProperty(device, kIOHIDProductIDKey as CFString)
+        let _productProperty = IOHIDDeviceGetProperty(device, kIOHIDProductKey as CFString)
+
+        guard let vendorIDProperty = _vendorIDProperty else { return }
+        guard let productIDProperty = _productIDProperty else { return }
+        guard let productProperty = _productProperty else { return }
+
+        let vendorID = (vendorIDProperty as! NSNumber).int32Value
+        let productID = (productIDProperty as! NSNumber).int32Value
+        let product = String(productProperty as! NSString)
+        
+        guard vendorID == JoyConManager.vendorID else { return }
+
+        let _controller: Controller?
+        _controller = switch productID {
+        case JoyConManager.joyConLID: JoyConL(device: device)
+        case JoyConManager.joyConRID:
+            switch product {
+            case "Joy-Con (R)": JoyConR(device: device)
+            case let p where p.contains("1"): FamicomController1(device: device)
+            case let p where p.contains("2"): FamicomController2(device: device)
+            default: nil
+            }
+        case JoyConManager.proConID: ProController(device: device)
+        case JoyConManager.snesConID: SNESController(device: device)
+        default: nil
         }
         
         guard let controller = _controller else { return }
